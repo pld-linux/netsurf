@@ -1,21 +1,22 @@
 Summary:	Light www browser
 Name:		netsurf
 Version:	2.9
-Release:	0.1
+Release:	1
 License:	GPL v2
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source-full/%{name}-%{version}-full-src.tar.gz
 # Source0-md5:	cfc2789997b356f2ea9d9f7694c4c909
-Source1:	netsurf.desktop
+Source1:	%{name}.desktop
 Patch0:		enable-nsfb.patch
 Patch1:		libnsfb-xcb-fix.patch
+Patch2:		nsfb-F10-exit.patch
 URL:		http://netsurf-browser.org/
 BuildRequires:	SDL-devel
 BuildRequires:	curl-devel
 BuildRequires:	freetype-devel
 BuildRequires:	libglade2-devel
-BuildRequires:	libmng-devel
 BuildRequires:	libjpeg-devel
+BuildRequires:	libmng-devel
 BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
 BuildRequires:	perl-base
@@ -23,10 +24,10 @@ BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Small web browser with CSS support.
-NetSurf is a multi-platform lightweight web browser. Its aim is to provide
-comprehensive rendering of HTML 5 with CSS 2 in a small resource footprint
-while remaining fast.
+Small web browser with CSS support. NetSurf is a multi-platform
+lightweight web browser. Its aim is to provide comprehensive rendering
+of HTML 5 with CSS 2 in a small resource footprint while remaining
+fast.
 
 %package common
 Summary:	netsurf - common files
@@ -41,17 +42,17 @@ netsurf - common files.
 netsurf - wspólne pliki.
 
 %package gtk
-Summary:	netsurf browser SDL version
-Summary(pl.UTF-8):	Wersja SDL netsurfa
+Summary:	netsurf browser gtk version
+Summary(pl.UTF-8):	Wersja gtk netsurfa
 License:	GPL v2
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
 
 %description gtk
-Small web browser with CSS support.
-NetSurf is a multi-platform lightweight web browser. Its aim is to provide
-comprehensive rendering of HTML 5 with CSS 2 in a small resource footprint
-while remaining fast.
+Small web browser with CSS support. NetSurf is a multi-platform
+lightweight web browser. Its aim is to provide comprehensive rendering
+of HTML 5 with CSS 2 in a small resource footprint while remaining
+fast.
 
 This is gtk version.
 
@@ -63,10 +64,10 @@ Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
 
 %description sdl
-Small web browser with CSS support.
-NetSurf is a multi-platform lightweight web browser. Its aim is to provide
-comprehensive rendering of HTML 5 with CSS 2 in a small resource footprint
-while remaining fast.
+Small web browser with CSS support. NetSurf is a multi-platform
+lightweight web browser. Its aim is to provide comprehensive rendering
+of HTML 5 with CSS 2 in a small resource footprint while remaining
+fast.
 
 This is SDL version.
 
@@ -74,22 +75,21 @@ This is SDL version.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 cat << EOF > netsurf-2.9/Makefile.config
 NETSURF_FB_FONTLIB := freetype
-NETSURF_FB_FONTPATH := /usr/share/fonts/TTF
+NETSURF_FB_FONTPATH := %{_datadir}/fonts/TTF
 EOF
 
 %build
-%{__make} \
-	\
-	PREFIX=%{_prefix} \
+CFLAGS="%{rpmcflags}" LDFLAGS="%{rpmldflags}" \
+	%{__make} PREFIX=%{_prefix} \
 	Q='' \
 	TARGET=gtk
 
-%{__make} \
-	\
-	PREFIX=%{_prefix} \
+CFLAGS="%{rpmcflags}" LDFLAGS="%{rpmldflags}" \
+	%{__make} PREFIX=%{_prefix} \
 	Q='' \
 	TARGET=framebuffer
 
