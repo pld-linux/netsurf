@@ -83,35 +83,48 @@ NETSURF_FB_FONTPATH := %{_datadir}/fonts/TTF
 EOF
 
 %build
-CFLAGS="%{rpmcflags}" LDFLAGS="%{rpmldflags}" \
-	%{__make} PREFIX=%{_prefix} \
+# make -j1 or it won't find libwapcaplet/libwapcaplet.h
+
+#-werror's:
+#src/surface/vnc.c: In function 'vnc_input':
+#src/surface/vnc.c:489:9: error: variable 'ret' set but not used [-Werror=unused-but-set-variable]
+export CC="%{__cc}"
+export CXX="%{__cxx}"
+export CFLAGS="%{rpmcflags} -Wno-error=unused-but-set-variable"
+export LDFLAGS="%{rpmldflags}"
+
+%{__make} -j1 \
+	PREFIX=%{_prefix} \
 	Q='' \
 	TARGET=gtk
 
-CFLAGS="%{rpmcflags}" LDFLAGS="%{rpmldflags}" \
-	%{__make} PREFIX=%{_prefix} \
+%{__make} -j1 \
+	PREFIX=%{_prefix} \
 	Q='' \
 	TARGET=framebuffer
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
+	Q='' \
 	PREFIX=%{_prefix} \
 	TARGET=gtk \
-	Q=''
+	DESTDIR=$RPM_BUILD_ROOT
 
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
+	Q='' \
 	PREFIX=%{_prefix} \
 	TARGET=framebuffer \
-	Q=''
+	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT/%{_desktopdir}
-install netsurf-2.9/nsfb $RPM_BUILD_ROOT/%{_bindir}
-install netsurf-2.9/nsgtk $RPM_BUILD_ROOT/%{_bindir}
+# this is binary from last "make install", we install more specific binary ourself
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/netsurf
+
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+install -p netsurf-2.9/nsfb $RPM_BUILD_ROOT/%{_bindir}
+install -p netsurf-2.9/nsgtk $RPM_BUILD_ROOT/%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
