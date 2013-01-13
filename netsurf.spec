@@ -83,15 +83,16 @@ NETSURF_FB_FONTPATH := %{_datadir}/fonts/TTF
 EOF
 
 %build
-# make -j1 or it won't find libwapcaplet/libwapcaplet.h
-
-#-werror's:
+export CC="%{__cc}"
+# while cxx not needed, somewhy it helps race condition on carme build
+export CXX="%{__cxx}"
+# silence -Werror:
 #src/surface/vnc.c: In function 'vnc_input':
 #src/surface/vnc.c:489:9: error: variable 'ret' set but not used [-Werror=unused-but-set-variable]
-export CC="%{__cc}"
-export CXX="%{__cxx}"
 export CFLAGS="%{rpmcflags} -Wno-error=unused-but-set-variable"
 export LDFLAGS="%{rpmldflags}"
+
+# make -j1 or it won't find libwapcaplet/libwapcaplet.h
 
 %{__make} -j1 \
 	PREFIX=%{_prefix} \
