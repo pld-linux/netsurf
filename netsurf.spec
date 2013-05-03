@@ -1,11 +1,11 @@
 Summary:	Light www browser
 Name:		netsurf
-Version:	2.9
+Version:	3.0
 Release:	1
 License:	GPL v2
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source-full/%{name}-%{version}-full-src.tar.gz
-# Source0-md5:	cfc2789997b356f2ea9d9f7694c4c909
+# Source0-md5:	51b13676d5f012409e0aefc6404938f6
 Source1:	%{name}.desktop
 Patch0:		enable-nsfb.patch
 Patch1:		libnsfb-xcb-fix.patch
@@ -14,11 +14,21 @@ URL:		http://netsurf-browser.org/
 BuildRequires:	SDL-devel
 BuildRequires:	curl-devel
 BuildRequires:	freetype-devel
+BuildRequires:	libCSS-devel
+BuildRequires:	libdom-devel
 BuildRequires:	libglade2-devel
+BuildRequires:	libhubbub-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmng-devel
+BuildRequires:	libnsbmp-devel
+BuildRequires:	libnsgif-devel
+BuildRequires:	libparserutils-devel
 BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
+BuildRequires:	libsvgtiny-devel
+BuildRequires:	libwapcaplet-devel
+BuildRequires:	netsurf-buildsystem
+BuildRequires:	nsgenbind
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -72,17 +82,18 @@ fast.
 This is SDL version.
 
 %prep
-%setup -q
-%patch0 -p1
-%patch1 -p1
+%setup -q -n netsurf-full-%{version}
+#%patch0 -p1
+#%patch1 -p1
 %patch2 -p1
 
-cat << EOF > netsurf-2.9/Makefile.config
+cat << EOF > src/netsurf-3.0/Makefile.config
 NETSURF_FB_FONTLIB := freetype
 NETSURF_FB_FONTPATH := %{_datadir}/fonts/TTF
 EOF
 
 %build
+cd src/netsurf-%{version}
 export CC="%{__cc}"
 # while cxx not needed, somewhy it helps race condition on carme build
 export CXX="%{__cxx}"
@@ -105,6 +116,7 @@ export LDFLAGS="%{rpmldflags}"
 	TARGET=framebuffer
 
 %install
+cd src/netsurf-%{version}
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	Q='' \
@@ -120,19 +132,19 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # this is binary from last "make install", we install more specific binary ourself
-%{__rm} $RPM_BUILD_ROOT%{_bindir}/netsurf
+%{__rm} -f $RPM_BUILD_ROOT%{_bindir}/netsurf
 
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install -p netsurf-2.9/nsfb $RPM_BUILD_ROOT/%{_bindir}
-install -p netsurf-2.9/nsgtk $RPM_BUILD_ROOT/%{_bindir}
+install nsfb $RPM_BUILD_ROOT/%{_bindir}
+install nsgtk $RPM_BUILD_ROOT/%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files common
 %defattr(644,root,root,755)
-%doc netsurf-2.9/ChangeLog netsurf-2.9/README
+%doc src/netsurf-%{version}/README
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*
 
