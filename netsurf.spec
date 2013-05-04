@@ -1,13 +1,13 @@
 Summary:	Light www browser
 Name:		netsurf
 Version:	3.0
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source-full/%{name}-%{version}-full-src.tar.gz
 # Source0-md5:	51b13676d5f012409e0aefc6404938f6
 Source1:	%{name}.desktop
-Patch0:		enable-nsfb.patch
+Patch0:		scroll.patch
 Patch1:		libnsfb-xcb-fix.patch
 Patch2:		nsfb-F10-exit.patch
 URL:		http://netsurf-browser.org/
@@ -83,7 +83,7 @@ This is SDL version.
 
 %prep
 %setup -q -n netsurf-full-%{version}
-#%patch0 -p1
+%patch0 -p1
 #%patch1 -p1
 %patch2 -p1
 
