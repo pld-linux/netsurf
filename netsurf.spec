@@ -21,6 +21,7 @@ BuildRequires:	libhubbub-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmng-devel
 BuildRequires:	libnsbmp-devel
+BuildRequires:	libnsfb-devel
 BuildRequires:	libnsgif-devel
 BuildRequires:	libparserutils-devel
 BuildRequires:	libpng-devel
