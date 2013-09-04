@@ -10,6 +10,7 @@ Source1:	%{name}.desktop
 Patch0:		scroll.patch
 Patch1:		libnsfb-xcb-fix.patch
 Patch2:		nsfb-F10-exit.patch
+Patch3:		nsfb-ldflags.patch
 URL:		http://netsurf-browser.org/
 BuildRequires:	SDL-devel
 BuildRequires:	curl-devel
@@ -87,6 +88,7 @@ This is SDL version.
 %patch0 -p1
 #%patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 cat << EOF > src/netsurf-3.0/Makefile.config
 NETSURF_FB_FONTLIB := freetype
