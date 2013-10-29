@@ -1,7 +1,7 @@
 Summary:	Light www browser
 Name:		netsurf
 Version:	3.0
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source-full/%{name}-%{version}-full-src.tar.gz
