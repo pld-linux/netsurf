@@ -1,7 +1,7 @@
-Summary:	Light www browser
+Summary:	Light WWW browser
 Name:		netsurf
 Version:	3.0
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source-full/%{name}-%{version}-full-src.tar.gz
@@ -44,7 +44,6 @@ fast.
 %package common
 Summary:	netsurf - common files
 Summary(pl.UTF-8):	netsurf - pliki wspólne
-License:	GPL v2
 Group:		Applications/Networking
 
 %description common
@@ -54,9 +53,8 @@ netsurf - common files.
 netsurf - wspólne pliki.
 
 %package gtk
-Summary:	netsurf browser gtk version
+Summary:	Netsurf browser GTK version
 Summary(pl.UTF-8):	Wersja gtk netsurfa
-License:	GPL v2
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
 
@@ -66,12 +64,11 @@ lightweight web browser. Its aim is to provide comprehensive rendering
 of HTML 5 with CSS 2 in a small resource footprint while remaining
 fast.
 
-This is gtk version.
+This is GTK version.
 
 %package sdl
 Summary:	netsurf browser SDL version
 Summary(pl.UTF-8):	Wersja SDL netsurfa
-License:	GPL v2
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
 
@@ -84,7 +81,7 @@ fast.
 This is SDL version.
 
 %prep
-%setup -q -n netsurf-full-%{version}
+%setup -q -n %{name}-full-%{version}
 %patch0 -p1
 #%patch1 -p1
 %patch2 -p1
@@ -119,6 +116,7 @@ export LDFLAGS="%{rpmldflags}"
 	TARGET=framebuffer
 
 %install
+rm -rf $RPM_BUILD_ROOT
 cd src/netsurf-%{version}
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
