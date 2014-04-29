@@ -1,5 +1,5 @@
---- netsurf-full-3.0/src/netsurf-3.0/framebuffer/Makefile.target.fb	2013-09-04 17:56:14.570468347 +0200
-+++ netsurf-full-3.0/src/netsurf-3.0/framebuffer/Makefile.target	2013-09-04 17:56:45.980954115 +0200
+--- netsurf-full-3.0/framebuffer/Makefile.target.fb	2013-09-04 17:56:14.570468347 +0200
++++ netsurf-full-3.0/framebuffer/Makefile.target	2013-09-04 17:56:45.980954115 +0200
 @@ -51,7 +51,7 @@ CFLAGS += -std=c99 -g -Dsmall $(WARNFLAG
  	  $(shell $(PKG_CONFIG) --cflags libnsfb libhubbub libcss openssl) \
  	  $(shell xml2-config --cflags)
