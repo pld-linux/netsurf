@@ -1,13 +1,12 @@
 Summary:	Light WWW browser
 Name:		netsurf
-Version:	3.0
-Release:	5
+Version:	3.1
+Release:	1
 License:	GPL v2
 Group:		Applications/Networking
-Source0:	http://download.netsurf-browser.org/netsurf/releases/source-full/%{name}-%{version}-full-src.tar.gz
-# Source0-md5:	51b13676d5f012409e0aefc6404938f6
+Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
+# Source0-md5:	b83932b311716054a5189f121cdd5fd4
 Source1:	%{name}.desktop
-Patch0:		scroll.patch
 Patch1:		libnsfb-xcb-fix.patch
 Patch2:		nsfb-F10-exit.patch
 Patch3:		nsfb-ldflags.patch
@@ -15,23 +14,23 @@ URL:		http://netsurf-browser.org/
 BuildRequires:	SDL-devel
 BuildRequires:	curl-devel
 BuildRequires:	freetype-devel
-BuildRequires:	libCSS-devel
-BuildRequires:	libdom-devel
+BuildRequires:	libCSS-devel >= 0.3.0
+BuildRequires:	libdom-devel >= 0.1.0
 BuildRequires:	libglade2-devel
-BuildRequires:	libhubbub-devel
+BuildRequires:	libhubbub-devel >= 0.3.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmng-devel
-BuildRequires:	libnsbmp-devel
-BuildRequires:	libnsfb-devel
-BuildRequires:	libnsgif-devel
-BuildRequires:	libparserutils-devel
+BuildRequires:	libnsbmp-devel >= 0.1.1
+BuildRequires:	libnsfb-devel >= 0.1.1
+BuildRequires:	libnsgif-devel >= 0.1.1
+BuildRequires:	libparserutils-devel >= 0.2.0
 BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
-BuildRequires:	libsvgtiny-devel
-BuildRequires:	libwapcaplet-devel
-BuildRequires:	netsurf-buildsystem
-BuildRequires:	nsgenbind
-BuildRequires:	perl-base
+BuildRequires:	libsvgtiny-devel >= 0.1.1
+BuildRequires:	libwapcaplet-devel >= 0.2.1
+BuildRequires:	netsurf-buildsystem >= 1.1
+BuildRequires:	nsgenbind >= 0.1.0
+BuildRequires:	perl-HTML-Parser
 BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -81,19 +80,17 @@ fast.
 This is SDL version.
 
 %prep
-%setup -q -n %{name}-full-%{version}
-%patch0 -p1
+%setup -q
 #%patch1 -p1
-%patch2 -p1
+#%%patch2 -p1
 %patch3 -p1
 
-cat << EOF > src/netsurf-3.0/Makefile.config
+cat << EOF > Makefile.config
 NETSURF_FB_FONTLIB := freetype
 NETSURF_FB_FONTPATH := %{_datadir}/fonts/TTF
 EOF
 
 %build
-cd src/netsurf-%{version}
 export CC="%{__cc}"
 # while cxx not needed, somewhy it helps race condition on carme build
 export CXX="%{__cxx}"
@@ -117,7 +114,6 @@ export LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-cd src/netsurf-%{version}
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	Q='' \
@@ -145,7 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files common
 %defattr(644,root,root,755)
-%doc src/netsurf-%{version}/README
+%doc README
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*
 
