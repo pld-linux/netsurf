@@ -7,9 +7,7 @@ Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
 # Source0-md5:	b83932b311716054a5189f121cdd5fd4
 Source1:	%{name}.desktop
-Patch1:		libnsfb-xcb-fix.patch
-Patch2:		nsfb-F10-exit.patch
-Patch3:		nsfb-ldflags.patch
+Patch0:		nsfb-ldflags.patch
 URL:		http://netsurf-browser.org/
 BuildRequires:	SDL-devel
 BuildRequires:	curl-devel
@@ -81,9 +79,7 @@ This is SDL version.
 
 %prep
 %setup -q
-#%patch1 -p1
-#%%patch2 -p1
-%patch3 -p1
+%patch0 -p1
 
 cat << EOF > Makefile.config
 NETSURF_FB_FONTLIB := freetype
