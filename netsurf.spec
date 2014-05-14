@@ -1,23 +1,33 @@
-Summary:	Light WWW browser
+#
+# Conditional build:
+%bcond_without	gstreamer	# GStreamer-based video support
+%bcond_with	pdf		# PDF export and GTK+ printing support via libharu [needs update?]
+%bcond_without	webp		# WebP image support
+#
+Summary:	Light WWW browser with CSS support
+Summary(pl.UTF-8):	Lekka przeglądarka WWW z obsługą CSS
 Name:		netsurf
 Version:	3.1
 Release:	1
-License:	GPL v2
+License:	GPL v2 with OpenSSL exception (code), MIT (artwork)
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
 # Source0-md5:	b83932b311716054a5189f121cdd5fd4
 Source1:	%{name}.desktop
 Patch0:		nsfb-ldflags.patch
+Patch1:		%{name}-link.patch
 URL:		http://netsurf-browser.org/
-BuildRequires:	SDL-devel
 BuildRequires:	curl-devel
-BuildRequires:	freetype-devel
+BuildRequires:	freetype-devel >= 2
+%{?with_gstreamer:BuildRequires:	gstreamer0.10-devel >= 0.10}
+BuildRequires:	gtk+2-devel >= 2.0
+BuildRequires:	js185-devel
 BuildRequires:	libCSS-devel >= 0.3.0
 BuildRequires:	libdom-devel >= 0.1.0
 BuildRequires:	libglade2-devel
+%{?with_pdf:BuildRequires:	libharu-devel}
 BuildRequires:	libhubbub-devel >= 0.3.0
 BuildRequires:	libjpeg-devel
-BuildRequires:	libmng-devel
 BuildRequires:	libnsbmp-devel >= 0.1.1
 BuildRequires:	libnsfb-devel >= 0.1.1
 BuildRequires:	libnsgif-devel >= 0.1.1
@@ -26,65 +36,112 @@ BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
 BuildRequires:	libsvgtiny-devel >= 0.1.1
 BuildRequires:	libwapcaplet-devel >= 0.2.1
+%{?with_webp:BuildRequires:	libwebp-devel}
+BuildRequires:	openssl-devel
 BuildRequires:	netsurf-buildsystem >= 1.1
 BuildRequires:	nsgenbind >= 0.1.0
 BuildRequires:	perl-HTML-Parser
 BuildRequires:	pkgconfig
+BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Small web browser with CSS support. NetSurf is a multi-platform
-lightweight web browser. Its aim is to provide comprehensive rendering
-of HTML 5 with CSS 2 in a small resource footprint while remaining
-fast.
+NetSurf is a multi-platform lightweight web browser. Its aim is to
+provide comprehensive rendering of HTML 5 with CSS 2 in a small
+resource footprint while remaining fast.
+
+%description -l pl.UTF-8
+NetSurf to wieloplatformowa, lekka przeglądarka WWW. Celem jest
+zapewnienie kompletnego renderowania HTML 5 z CSS 2 przy małym
+wykorzystanie zasobów, z zachowaniem dużej szybkości.
 
 %package common
-Summary:	netsurf - common files
-Summary(pl.UTF-8):	netsurf - pliki wspólne
+Summary:	NetSurf - common files
+Summary(pl.UTF-8):	NetSurf - pliki wspólne
 Group:		Applications/Networking
 
 %description common
-netsurf - common files.
+NetSurf - common files.
 
 %description common -l pl.UTF-8
-netsurf - wspólne pliki.
+NetSurf - wspólne pliki.
 
 %package gtk
-Summary:	Netsurf browser GTK version
-Summary(pl.UTF-8):	Wersja gtk netsurfa
+Summary:	NetSurf web browser - GTK+ version
+Summary(pl.UTF-8):	Wersja GTK+ przeglądarki WWW NetSurf
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
+Requires:	libCSS >= 0.3.0
+Requires:	libdom >= 0.1.0
+Requires:	libhubbub >= 0.3.0
+Requires:	libnsbmp >= 0.1.1
+Requires:	libnsgif >= 0.1.1
+Requires:	libparserutils >= 0.2.0
+Requires:	libsvgtiny >= 0.1.1
+Requires:	libwapcaplet >= 0.2.1
 
 %description gtk
-Small web browser with CSS support. NetSurf is a multi-platform
-lightweight web browser. Its aim is to provide comprehensive rendering
-of HTML 5 with CSS 2 in a small resource footprint while remaining
-fast.
+NetSurf is a multi-platform lightweight web browser. Its aim is to
+provide comprehensive rendering of HTML 5 with CSS 2 in a small
+resource footprint while remaining fast.
 
-This is GTK version.
+This package contains GTK+ version.
+
+%description gtk -l pl.UTF-8
+NetSurf is a multi-platform lightweight web browser. Its aim is to
+provide comprehensive rendering of HTML 5 with CSS 2 in a small
+resource footprint while remaining fast.
+
+Ten pakiet zawiera wersję GTK+.
 
 %package sdl
-Summary:	netsurf browser SDL version
-Summary(pl.UTF-8):	Wersja SDL netsurfa
+Summary:	NetSurf web browser - SDL version
+Summary(pl.UTF-8):	Wersja SDL przeglądarki WWW NetSurf
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
+Requires:	libCSS >= 0.3.0
+Requires:	libdom >= 0.1.0
+Requires:	libhubbub >= 0.3.0
+Requires:	libnsbmp >= 0.1.1
+Requires:	libnsfb >= 0.1.1
+Requires:	libnsgif >= 0.1.1
+Requires:	libparserutils >= 0.2.0
+Requires:	libsvgtiny >= 0.1.1
+Requires:	libwapcaplet >= 0.2.1
 
 %description sdl
-Small web browser with CSS support. NetSurf is a multi-platform
-lightweight web browser. Its aim is to provide comprehensive rendering
-of HTML 5 with CSS 2 in a small resource footprint while remaining
-fast.
+NetSurf is a multi-platform lightweight web browser. Its aim is to
+provide comprehensive rendering of HTML 5 with CSS 2 in a small
+resource footprint while remaining fast.
 
-This is SDL version.
+This package contains SDL version.
+
+%description sdl -l pl.UTF-8
+NetSurf is a multi-platform lightweight web browser. Its aim is to
+provide comprehensive rendering of HTML 5 with CSS 2 in a small
+resource footprint while remaining fast.
+
+Ten pakiet zawiera wersję SDL.
 
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 cat << EOF > Makefile.config
 NETSURF_FB_FONTLIB := freetype
 NETSURF_FB_FONTPATH := %{_datadir}/fonts/TTF
+NETSURF_USE_NSSVG := YES
+NETSURF_USE_RSVG := YES
+%{?with_webp:NETSURF_USE_WEBP := YES}
+%{?with_gstreamer:NETSURF_USE_VIDEO := YES}
+%{?with_pdf:NETSURF_USE_HARU_PDF := YES}
 EOF
+
+%if %{with gstreamer}
+# GStreamer 0.10 uses now deprecated glib mutex APIs
+%{__sed} -i -e '/-DG_DISABLE_DEPRECATED/d' gtk/Makefile.target
+%endif
 
 %build
 export CC="%{__cc}"
@@ -110,7 +167,6 @@ export LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	Q='' \
 	PREFIX=%{_prefix} \
@@ -129,15 +185,15 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install nsfb $RPM_BUILD_ROOT/%{_bindir}
-install nsgtk $RPM_BUILD_ROOT/%{_bindir}
+install nsfb $RPM_BUILD_ROOT%{_bindir}
+install nsgtk $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files common
 %defattr(644,root,root,755)
-%doc README
+%doc COPYING README
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*
 
