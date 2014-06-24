@@ -88,9 +88,9 @@ resource footprint while remaining fast.
 This package contains GTK+ version.
 
 %description gtk -l pl.UTF-8
-NetSurf is a multi-platform lightweight web browser. Its aim is to
-provide comprehensive rendering of HTML 5 with CSS 2 in a small
-resource footprint while remaining fast.
+NetSurf to wieloplatformowa, lekka przeglądarka WWW. Celem jest
+zapewnienie kompletnego renderowania HTML 5 z CSS 2 przy małym
+wykorzystanie zasobów, z zachowaniem dużej szybkości.
 
 Ten pakiet zawiera wersję GTK+.
 
@@ -117,9 +117,9 @@ resource footprint while remaining fast.
 This package contains SDL version.
 
 %description sdl -l pl.UTF-8
-NetSurf is a multi-platform lightweight web browser. Its aim is to
-provide comprehensive rendering of HTML 5 with CSS 2 in a small
-resource footprint while remaining fast.
+NetSurf to wieloplatformowa, lekka przeglądarka WWW. Celem jest
+zapewnienie kompletnego renderowania HTML 5 z CSS 2 przy małym
+wykorzystanie zasobów, z zachowaniem dużej szybkości.
 
 Ten pakiet zawiera wersję SDL.
 
