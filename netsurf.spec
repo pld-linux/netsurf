@@ -8,7 +8,7 @@ Summary:	Light WWW browser with CSS support
 Summary(pl.UTF-8):	Lekka przeglądarka WWW z obsługą CSS
 Name:		netsurf
 Version:	3.1
-Release:	1
+Release:	2
 License:	GPL v2 with OpenSSL exception (code), MIT (artwork)
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
@@ -16,6 +16,7 @@ Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{v
 Source1:	%{name}.desktop
 Patch0:		nsfb-ldflags.patch
 Patch1:		%{name}-link.patch
+Patch2:		no-Werror.patch
 URL:		http://netsurf-browser.org/
 BuildRequires:	curl-devel
 BuildRequires:	freetype-devel >= 2
@@ -127,6 +128,7 @@ Ten pakiet zawiera wersję SDL.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 cat << EOF > Makefile.config
 NETSURF_FB_FONTLIB := freetype

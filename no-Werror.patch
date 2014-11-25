@@ -1,0 +1,11 @@
+--- netsurf-3.1/monkey/Makefile.target~	2014-04-25 13:14:16.000000000 +0200
++++ netsurf-3.1/monkey/Makefile.target	2014-11-25 19:35:10.859023670 +0100
+@@ -33,8 +33,6 @@
+ # no pkg-config for this library
+ $(eval $(call feature_enabled,WEBP,-DWITH_WEBP,-lwebp -lvpx,WebP (libwebp)))
+ 
+-WARNFLAGS += -Werror
+-
+ MONKEYCFLAGS := -std=c99 -Dmonkey -Dnsmonkey \
+ 		-D_BSD_SOURCE \
+ 		-D_XOPEN_SOURCE=600 \
