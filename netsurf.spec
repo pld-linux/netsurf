@@ -8,7 +8,7 @@ Summary:	Light WWW browser with CSS support
 Summary(pl.UTF-8):	Lekka przeglądarka WWW z obsługą CSS
 Name:		netsurf
 Version:	3.1
-Release:	2
+Release:	3
 License:	GPL v2 with OpenSSL exception (code), MIT (artwork)
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
@@ -17,6 +17,7 @@ Source1:	%{name}.desktop
 Patch0:		nsfb-ldflags.patch
 Patch1:		%{name}-link.patch
 Patch2:		no-Werror.patch
+Patch3:		optflags.patch
 URL:		http://netsurf-browser.org/
 BuildRequires:	curl-devel
 BuildRequires:	freetype-devel >= 2
@@ -129,6 +130,7 @@ Ten pakiet zawiera wersję SDL.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 cat << EOF > Makefile.config
 NETSURF_FB_FONTLIB := freetype
@@ -152,17 +154,22 @@ export CXX="%{__cxx}"
 # silence -Werror:
 #src/surface/vnc.c: In function 'vnc_input':
 #src/surface/vnc.c:489:9: error: variable 'ret' set but not used [-Werror=unused-but-set-variable]
-export CFLAGS="%{rpmcflags} -Wno-error=unused-but-set-variable"
+export CFLAGS="%{rpmcflags} -Wno-error=unused-but-set-variable -D_GNU_SOURCE"
+export CXXFLAGS="%{rpmcxxflags} -Wno-error=unused-but-set-variable -D_GNU_SOURCE"
 export LDFLAGS="%{rpmldflags}"
 
 # make -j1 or it won't find libwapcaplet/libwapcaplet.h
 
 %{__make} -j1 \
+	OPTFLAGS="%{rpmcflags} -Wno-error=unused-but-set-variable -D_GNU_SOURCE" \
+	OPTLDFLAGS="%{rpmldflags}" \
 	PREFIX=%{_prefix} \
 	Q='' \
 	TARGET=gtk
 
 %{__make} -j1 \
+	OPTFLAGS="%{rpmcflags} -Wno-error=unused-but-set-variable -D_GNU_SOURCE" \
+	OPTLDFLAGS="%{rpmldflags}" \
 	PREFIX=%{_prefix} \
 	Q='' \
 	TARGET=framebuffer
