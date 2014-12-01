@@ -7,12 +7,12 @@
 Summary:	Light WWW browser with CSS support
 Summary(pl.UTF-8):	Lekka przeglądarka WWW z obsługą CSS
 Name:		netsurf
-Version:	3.1
-Release:	3
+Version:	3.2
+Release:	1
 License:	GPL v2 with OpenSSL exception (code), MIT (artwork)
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
-# Source0-md5:	b83932b311716054a5189f121cdd5fd4
+# Source0-md5:	8b49a31345e2902fd962fcc11a1eedc2
 Source1:	%{name}.desktop
 Patch0:		nsfb-ldflags.patch
 Patch1:		%{name}-link.patch
@@ -24,23 +24,23 @@ BuildRequires:	freetype-devel >= 2
 %{?with_gstreamer:BuildRequires:	gstreamer0.10-devel >= 0.10}
 BuildRequires:	gtk+2-devel >= 2.0
 BuildRequires:	js185-devel
-BuildRequires:	libCSS-devel >= 0.3.0
-BuildRequires:	libdom-devel >= 0.1.0
+BuildRequires:	libCSS-devel >= 0.4.0
+BuildRequires:	libdom-devel >= 0.1.1
 BuildRequires:	libglade2-devel
 %{?with_pdf:BuildRequires:	libharu-devel}
 BuildRequires:	libhubbub-devel >= 0.3.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	libnsbmp-devel >= 0.1.1
-BuildRequires:	libnsfb-devel >= 0.1.1
+BuildRequires:	libnsfb-devel >= 0.1.2
 BuildRequires:	libnsgif-devel >= 0.1.1
 BuildRequires:	libparserutils-devel >= 0.2.0
 BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
-BuildRequires:	libsvgtiny-devel >= 0.1.1
+BuildRequires:	libsvgtiny-devel >= 0.1.2
 BuildRequires:	libwapcaplet-devel >= 0.2.1
 %{?with_webp:BuildRequires:	libwebp-devel}
 BuildRequires:	openssl-devel
-BuildRequires:	netsurf-buildsystem >= 1.1
+BuildRequires:	netsurf-buildsystem >= 1.2
 BuildRequires:	nsgenbind >= 0.1.0
 BuildRequires:	perl-HTML-Parser
 BuildRequires:	pkgconfig
@@ -73,13 +73,13 @@ Summary:	NetSurf web browser - GTK+ version
 Summary(pl.UTF-8):	Wersja GTK+ przeglądarki WWW NetSurf
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
-Requires:	libCSS >= 0.3.0
-Requires:	libdom >= 0.1.0
+Requires:	libCSS >= 0.4.0
+Requires:	libdom >= 0.1.1
 Requires:	libhubbub >= 0.3.0
 Requires:	libnsbmp >= 0.1.1
 Requires:	libnsgif >= 0.1.1
 Requires:	libparserutils >= 0.2.0
-Requires:	libsvgtiny >= 0.1.1
+Requires:	libsvgtiny >= 0.1.2
 Requires:	libwapcaplet >= 0.2.1
 
 %description gtk
@@ -101,14 +101,14 @@ Summary:	NetSurf web browser - SDL version
 Summary(pl.UTF-8):	Wersja SDL przeglądarki WWW NetSurf
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
-Requires:	libCSS >= 0.3.0
-Requires:	libdom >= 0.1.0
+Requires:	libCSS >= 0.4.0
+Requires:	libdom >= 0.1.1
 Requires:	libhubbub >= 0.3.0
 Requires:	libnsbmp >= 0.1.1
-Requires:	libnsfb >= 0.1.1
+Requires:	libnsfb >= 0.1.2
 Requires:	libnsgif >= 0.1.1
 Requires:	libparserutils >= 0.2.0
-Requires:	libsvgtiny >= 0.1.1
+Requires:	libsvgtiny >= 0.1.2
 Requires:	libwapcaplet >= 0.2.1
 
 %description sdl
@@ -140,6 +140,10 @@ NETSURF_USE_RSVG := YES
 %{?with_webp:NETSURF_USE_WEBP := YES}
 %{?with_gstreamer:NETSURF_USE_VIDEO := YES}
 %{?with_pdf:NETSURF_USE_HARU_PDF := YES}
+# js185
+NETSURF_USE_MOZJS := YES
+# xulrunner
+NETSURF_USE_JS := NO
 EOF
 
 %if %{with gstreamer}
