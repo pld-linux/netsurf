@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_without	gstreamer	# GStreamer-based video support
+%bcond_without	js		# Javascript
 %bcond_with	pdf		# PDF export and GTK+ printing support via libharu [needs update?]
 %bcond_without	webp		# WebP image support
 #
@@ -8,7 +9,7 @@ Summary:	Light WWW browser with CSS support
 Summary(pl.UTF-8):	Lekka przeglądarka WWW z obsługą CSS
 Name:		netsurf
 Version:	3.2
-Release:	1
+Release:	2
 License:	GPL v2 with OpenSSL exception (code), MIT (artwork)
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
@@ -23,7 +24,7 @@ BuildRequires:	curl-devel
 BuildRequires:	freetype-devel >= 2
 %{?with_gstreamer:BuildRequires:	gstreamer0.10-devel >= 0.10}
 BuildRequires:	gtk+2-devel >= 2.0
-BuildRequires:	js185-devel
+%{?with_js:BuildRequires:	js185-devel}
 BuildRequires:	libCSS-devel >= 0.4.0
 BuildRequires:	libdom-devel >= 0.1.1
 BuildRequires:	libglade2-devel
@@ -41,7 +42,7 @@ BuildRequires:	libwapcaplet-devel >= 0.2.1
 %{?with_webp:BuildRequires:	libwebp-devel}
 BuildRequires:	openssl-devel
 BuildRequires:	netsurf-buildsystem >= 1.2
-BuildRequires:	nsgenbind >= 0.1.0
+BuildRequires:	nsgenbind >= 0.1.1
 BuildRequires:	perl-HTML-Parser
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
@@ -141,7 +142,11 @@ NETSURF_USE_RSVG := YES
 %{?with_gstreamer:NETSURF_USE_VIDEO := YES}
 %{?with_pdf:NETSURF_USE_HARU_PDF := YES}
 # js185
+%if %{with js}
 NETSURF_USE_MOZJS := YES
+%else
+NETSURF_USE_MOZJS := NO
+%endif
 # xulrunner
 NETSURF_USE_JS := NO
 EOF
