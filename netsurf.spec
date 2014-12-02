@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_without	gstreamer	# GStreamer-based video support
-%bcond_without	js		# Javascript
+%bcond_without	js		# JavaScript support
 %bcond_with	pdf		# PDF export and GTK+ printing support via libharu [needs update?]
 %bcond_without	webp		# WebP image support
 #
@@ -27,7 +27,6 @@ BuildRequires:	gtk+2-devel >= 2.0
 %{?with_js:BuildRequires:	js185-devel}
 BuildRequires:	libCSS-devel >= 0.4.0
 BuildRequires:	libdom-devel >= 0.1.1
-BuildRequires:	libglade2-devel
 %{?with_pdf:BuildRequires:	libharu-devel}
 BuildRequires:	libhubbub-devel >= 0.3.0
 BuildRequires:	libjpeg-devel
@@ -155,6 +154,8 @@ EOF
 # GStreamer 0.10 uses now deprecated glib mutex APIs
 %{__sed} -i -e '/-DG_DISABLE_DEPRECATED/d' gtk/Makefile.target
 %endif
+# gdk-pixbuf 2.31 deprecates GdkPixdata
+%{__sed} -i -e '/-DGDK_PIXBUF_DISABLE_DEPRECATED/d' gtk/Makefile.target
 
 %build
 export CC="%{__cc}"
