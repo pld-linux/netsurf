@@ -1,15 +1,17 @@
---- netsurf-3.1/Makefile.orig	2014-04-25 13:14:16.000000000 +0200
-+++ netsurf-3.1/Makefile	2014-11-25 20:46:18.669202155 +0100
-@@ -437,10 +437,10 @@
- $(eval $(call feature_enabled,LIBICONV_PLUG,-DLIBICONV_PLUG,,glibc internal iconv))
+--- netsurf-3.3/Makefile.orig	2015-03-16 12:53:40.421670394 +0100
++++ netsurf-3.3/Makefile	2015-03-16 12:55:55.214273473 +0100
+@@ -500,11 +500,11 @@
+ $(eval $(call pkg_config_find_and_add,libnsutils,nsutils))
  
- # common libraries without pkg-config support
+ # Common libraries without pkg-config support
 -LDFLAGS += -lz
 +LDFLAGS += -lz $(OPTLDFLAGS)
  
  # add top level and build directory to include search path
 -CFLAGS += -I. -I$(OBJROOT)
+-CXXFLAGS += -I. -I$(OBJROOT)
 +CFLAGS += -I. -I$(OBJROOT) $(OPTFLAGS)
++CXXFLAGS += -I. -I$(OBJROOT) $(OPTFLAGS)
  
  # export the user agent format
  CFLAGS += -DNETSURF_UA_FORMAT_STRING=\"$(NETSURF_UA_FORMAT_STRING)\"

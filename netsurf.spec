@@ -8,40 +8,43 @@
 Summary:	Light WWW browser with CSS support
 Summary(pl.UTF-8):	Lekka przeglądarka WWW z obsługą CSS
 Name:		netsurf
-Version:	3.2
-Release:	2
+Version:	3.3
+Release:	1
 License:	GPL v2 with OpenSSL exception (code), MIT (artwork)
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
-# Source0-md5:	8b49a31345e2902fd962fcc11a1eedc2
+# Source0-md5:	81a2838d8816ea435c4471f515a397d4
 Source1:	%{name}.desktop
 Patch0:		nsfb-ldflags.patch
 Patch1:		%{name}-link.patch
 Patch2:		no-Werror.patch
 Patch3:		optflags.patch
+Patch4:		jsapi_h.patch
 URL:		http://netsurf-browser.org/
 BuildRequires:	curl-devel
 BuildRequires:	freetype-devel >= 2
 %{?with_gstreamer:BuildRequires:	gstreamer0.10-devel >= 0.10}
 BuildRequires:	gtk+2-devel >= 2.0
 %{?with_js:BuildRequires:	js185-devel}
-BuildRequires:	libCSS-devel >= 0.4.0
-BuildRequires:	libdom-devel >= 0.1.1
+BuildRequires:	libCSS-devel >= 0.5.0
+BuildRequires:	libdom-devel >= 0.1.2
 %{?with_pdf:BuildRequires:	libharu-devel}
-BuildRequires:	libhubbub-devel >= 0.3.0
+BuildRequires:	libhubbub-devel >= 0.3.1
 BuildRequires:	libjpeg-devel
-BuildRequires:	libnsbmp-devel >= 0.1.1
-BuildRequires:	libnsfb-devel >= 0.1.2
-BuildRequires:	libnsgif-devel >= 0.1.1
-BuildRequires:	libparserutils-devel >= 0.2.0
+BuildRequires:	libnsbmp-devel >= 0.1.2
+BuildRequires:	libnsfb-devel >= 0.1.3
+BuildRequires:	libnsgif-devel >= 0.1.2
+BuildRequires:	libnsutils-devel >= 0.0.1
+BuildRequires:	libparserutils-devel >= 0.2.1
 BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
-BuildRequires:	libsvgtiny-devel >= 0.1.2
-BuildRequires:	libwapcaplet-devel >= 0.2.1
+BuildRequires:	libsvgtiny-devel >= 0.1.3
+BuildRequires:	libutf8proc-devel >= 1.1.6
+BuildRequires:	libwapcaplet-devel >= 0.2.2
 %{?with_webp:BuildRequires:	libwebp-devel}
 BuildRequires:	openssl-devel
-BuildRequires:	netsurf-buildsystem >= 1.2
-BuildRequires:	nsgenbind >= 0.1.1
+BuildRequires:	netsurf-buildsystem >= 1.3
+BuildRequires:	nsgenbind >= 0.1.2
 BuildRequires:	perl-HTML-Parser
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
@@ -131,6 +134,7 @@ Ten pakiet zawiera wersję SDL.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 cat << EOF > Makefile.config
 NETSURF_FB_FONTLIB := freetype

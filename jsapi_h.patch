@@ -1,0 +1,11 @@
+--- netsurf-3.3/javascript/jsapi.h.orig	2015-03-16 13:11:26.470556751 +0100
++++ netsurf-3.3/javascript/jsapi.h	2015-03-16 13:11:50.455694550 +0100
+@@ -25,7 +25,7 @@
+ 
+ /* include the correct header */
+ #ifdef WITH_MOZJS
+-#include "js/jsapi.h"
++#include <jsapi.h>
+ #else
+ #include "mozjs/jsapi.h"
+ #endif
