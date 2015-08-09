@@ -30,3 +30,36 @@
  
  CFLAGS += -std=c99 -g -Dsmall $(WARNFLAGS) 	\
  	  -D_BSD_SOURCE \
+--- netsurf-3.3/gtk/Makefile.target~	2015-08-09 13:38:49.000000000 +0200
++++ netsurf-3.3/gtk/Makefile.target	2015-08-09 13:39:35.568425768 +0200
+@@ -28,7 +28,7 @@
+ $(eval $(call pkg_config_find_and_add_enabled,NSSVG,libsvgtiny,SVG))
+ $(eval $(call pkg_config_find_and_add_enabled,ROSPRITE,librosprite,Sprite))
+ $(eval $(call feature_enabled,WEBP,-DWITH_WEBP,-lwebp,WebP (libwebp)))
+-$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs185,JavaScript))
++$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs187,JavaScript))
+ $(eval $(call pkg_config_find_and_add_enabled,JS,mozilla-js,JavaScript))
+ $(eval $(call pkg_config_find_and_add_enabled,VIDEO,gstreamer-0.10,Video))
+ 
+--- netsurf-3.3/monkey/Makefile.target~	2015-08-09 13:38:49.000000000 +0200
++++ netsurf-3.3/monkey/Makefile.target	2015-08-09 13:40:00.840359667 +0200
+@@ -27,7 +27,7 @@
+ $(eval $(call pkg_config_find_and_add_enabled,BMP,libnsbmp,BMP))
+ $(eval $(call pkg_config_find_and_add_enabled,GIF,libnsgif,GIF))
+ $(eval $(call pkg_config_find_and_add_enabled,PNG,libpng,PNG  ))
+-$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs185,JavaScript))
++$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs187,JavaScript))
+ $(eval $(call pkg_config_find_and_add_enabled,JS,mozilla-js,JavaScript))
+ 
+ # no pkg-config for this library
+--- netsurf-3.3/riscos/Makefile.target~	2015-03-10 15:37:37.000000000 +0100
++++ netsurf-3.3/riscos/Makefile.target	2015-08-09 13:40:14.674721493 +0200
+@@ -33,7 +33,7 @@
+   $(eval $(call pkg_config_find_and_add_enabled,BMP,libnsbmp,BMP))
+   $(eval $(call pkg_config_find_and_add_enabled,GIF,libnsgif,GIF))
+   $(eval $(call pkg_config_find_and_add_enabled,PNG,libpng,PNG  ))
+-  $(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs185,JavaScript))
++  $(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs187,JavaScript))
+   $(eval $(call pkg_config_find_and_add_enabled,JS,mozilla-js,JavaScript))
+ endif
+ 
