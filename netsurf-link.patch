@@ -23,7 +23,8 @@
 +$(eval $(call pkg_config_find_and_add_enabled,RSVG,librsvg-2.0,SVG))
 +$(eval $(call pkg_config_find_and_add_enabled,NSSVG,libsvgtiny,SVG))
 +$(eval $(call feature_enabled,WEBP,-DWITH_WEBP,-lwebp,WebP (libwebp)))
- $(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs185,JavaScript))
+-$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs185,JavaScript))
++$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs187,JavaScript))
  $(eval $(call pkg_config_find_and_add_enabled,JS,mozilla-js,JavaScript))
 +$(eval $(call pkg_config_find_and_add_enabled,VIDEO,gstreamer-0.10,Video))
  
