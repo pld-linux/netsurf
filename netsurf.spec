@@ -25,7 +25,7 @@ BuildRequires:	curl-devel
 BuildRequires:	freetype-devel >= 2
 %{?with_gstreamer:BuildRequires:	gstreamer0.10-devel >= 0.10}
 BuildRequires:	gtk+2-devel >= 2.0
-%{?with_js:BuildRequires:	js185-devel}
+%{?with_js:BuildRequires:	js187-devel}
 BuildRequires:	libCSS-devel >= 0.5.0
 BuildRequires:	libdom-devel >= 0.1.2
 %{?with_pdf:BuildRequires:	libharu-devel}
@@ -144,7 +144,7 @@ NETSURF_USE_RSVG := YES
 %{?with_webp:NETSURF_USE_WEBP := YES}
 %{?with_gstreamer:NETSURF_USE_VIDEO := YES}
 %{?with_pdf:NETSURF_USE_HARU_PDF := YES}
-# js185
+# js187
 %if %{with js}
 NETSURF_USE_MOZJS := YES
 %else
