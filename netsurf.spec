@@ -9,7 +9,7 @@ Summary:	Light WWW browser with CSS support
 Summary(pl.UTF-8):	Lekka przeglądarka WWW z obsługą CSS
 Name:		netsurf
 Version:	3.3
-Release:	1
+Release:	2
 License:	GPL v2 with OpenSSL exception (code), MIT (artwork)
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
