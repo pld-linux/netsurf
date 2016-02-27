@@ -110,6 +110,7 @@ Requires:	libnsgif >= 0.1.3
 Requires:	libparserutils >= 0.2.3
 Requires:	libsvgtiny >= 0.1.4
 Requires:	libwapcaplet >= 0.3.0
+Suggests:	fonts-TTF-DejaVu
 
 %description sdl
 NetSurf is a multi-platform lightweight web browser. Its aim is to
