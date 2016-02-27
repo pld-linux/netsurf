@@ -1,12 +1,13 @@
---- netsurf-3.1/framebuffer/Makefile.target.orig	2014-05-14 15:23:27.497560768 +0200
-+++ netsurf-3.1/framebuffer/Makefile.target	2014-05-14 15:59:34.877515592 +0200
-@@ -11,12 +11,15 @@
+--- netsurf-3.4/framebuffer/Makefile.target.orig	2016-02-27 16:48:23.588244698 +0100
++++ netsurf-3.4/framebuffer/Makefile.target	2016-02-27 16:54:49.101350399 +0100
+@@ -4,13 +4,16 @@
  
  # define additional CFLAGS and LDFLAGS requirements for pkg-configed libs here
  NETSURF_FEATURE_RSVG_CFLAGS := -DWITH_RSVG
 +NETSURF_FEATURE_NSSVG_CFLAGS := -DWITH_NS_SVG
  NETSURF_FEATURE_ROSPRITE_CFLAGS := -DWITH_NSSPRITE
  NETSURF_FEATURE_HUBBUB_CFLAGS := -DWITH_HUBBUB
+ NETSURF_FEATURE_PNG_CFLAGS := -DWITH_PNG
  NETSURF_FEATURE_BMP_CFLAGS := -DWITH_BMP
  NETSURF_FEATURE_GIF_CFLAGS := -DWITH_GIF
 +NETSURF_FEATURE_WEBP_CFLAGS := -DWITH_WEBP
@@ -16,34 +17,23 @@
  
  CFLAGS += -Dnsframebuffer 
  
-@@ -39,8 +42,12 @@
+@@ -63,8 +66,12 @@ $(eval $(call pkg_config_find_and_add_en
  $(eval $(call pkg_config_find_and_add_enabled,ROSPRITE,librosprite,Sprite))
  $(eval $(call pkg_config_find_and_add_enabled,BMP,libnsbmp,BMP))
  $(eval $(call pkg_config_find_and_add_enabled,GIF,libnsgif,GIF))
+-$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs185,JavaScript))
 +$(eval $(call pkg_config_find_and_add_enabled,RSVG,librsvg-2.0,SVG))
 +$(eval $(call pkg_config_find_and_add_enabled,NSSVG,libsvgtiny,SVG))
 +$(eval $(call feature_enabled,WEBP,-DWITH_WEBP,-lwebp,WebP (libwebp)))
--$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs185,JavaScript))
 +$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs187,JavaScript))
  $(eval $(call pkg_config_find_and_add_enabled,JS,mozilla-js,JavaScript))
 +$(eval $(call pkg_config_find_and_add_enabled,VIDEO,gstreamer-0.10,Video))
  
- CFLAGS += -std=c99 -g -Dsmall $(WARNFLAGS) 	\
- 	  -D_BSD_SOURCE \
---- netsurf-3.3/gtk/Makefile.target~	2015-08-09 13:38:49.000000000 +0200
-+++ netsurf-3.3/gtk/Makefile.target	2015-08-09 13:39:35.568425768 +0200
-@@ -28,7 +28,7 @@
- $(eval $(call pkg_config_find_and_add_enabled,NSSVG,libsvgtiny,SVG))
- $(eval $(call pkg_config_find_and_add_enabled,ROSPRITE,librosprite,Sprite))
- $(eval $(call feature_enabled,WEBP,-DWITH_WEBP,-lwebp,WebP (libwebp)))
--$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs185,JavaScript))
-+$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs187,JavaScript))
- $(eval $(call pkg_config_find_and_add_enabled,JS,mozilla-js,JavaScript))
- $(eval $(call pkg_config_find_and_add_enabled,VIDEO,gstreamer-0.10,Video))
  
---- netsurf-3.3/monkey/Makefile.target~	2015-08-09 13:38:49.000000000 +0200
-+++ netsurf-3.3/monkey/Makefile.target	2015-08-09 13:40:00.840359667 +0200
-@@ -27,7 +27,7 @@
+ # ----------------------------------------------------------------------------
+--- netsurf-3.4/monkey/Makefile.target.orig	2016-02-16 14:30:38.000000000 +0100
++++ netsurf-3.4/monkey/Makefile.target	2016-02-27 16:55:46.374649928 +0100
+@@ -40,7 +40,7 @@ $(eval $(call pkg_config_find_and_add_en
  $(eval $(call pkg_config_find_and_add_enabled,BMP,libnsbmp,BMP))
  $(eval $(call pkg_config_find_and_add_enabled,GIF,libnsgif,GIF))
  $(eval $(call pkg_config_find_and_add_enabled,PNG,libpng,PNG  ))
@@ -51,15 +41,15 @@
 +$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs187,JavaScript))
  $(eval $(call pkg_config_find_and_add_enabled,JS,mozilla-js,JavaScript))
  
- # no pkg-config for this library
---- netsurf-3.3/riscos/Makefile.target~	2015-03-10 15:37:37.000000000 +0100
-+++ netsurf-3.3/riscos/Makefile.target	2015-08-09 13:40:14.674721493 +0200
-@@ -33,7 +33,7 @@
-   $(eval $(call pkg_config_find_and_add_enabled,BMP,libnsbmp,BMP))
-   $(eval $(call pkg_config_find_and_add_enabled,GIF,libnsgif,GIF))
-   $(eval $(call pkg_config_find_and_add_enabled,PNG,libpng,PNG  ))
--  $(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs185,JavaScript))
-+  $(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs187,JavaScript))
-   $(eval $(call pkg_config_find_and_add_enabled,JS,mozilla-js,JavaScript))
- endif
+ # ---------------------------------------------------------------------------
+--- netsurf-3.4/riscos/Makefile.target.orig	2016-02-16 14:30:38.000000000 +0100
++++ netsurf-3.4/riscos/Makefile.target	2016-02-27 16:56:44.121296264 +0100
+@@ -28,7 +28,7 @@ NETSURF_FEATURE_MOZJS_CFLAGS := -DWITH_M
+ $(eval $(call pkg_config_find_and_add_enabled,BMP,libnsbmp,BMP))
+ $(eval $(call pkg_config_find_and_add_enabled,GIF,libnsgif,GIF))
+ $(eval $(call pkg_config_find_and_add_enabled,PNG,libpng,PNG  ))
+-$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs185,JavaScript))
++$(eval $(call pkg_config_find_and_add_enabled,MOZJS,mozjs187,JavaScript))
+ $(eval $(call pkg_config_find_and_add_enabled,JS,mozilla-js,JavaScript))
+ 
  

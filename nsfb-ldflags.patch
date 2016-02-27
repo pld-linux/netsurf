@@ -1,11 +1,12 @@
---- netsurf-full-3.0/framebuffer/Makefile.target.fb	2013-09-04 17:56:14.570468347 +0200
-+++ netsurf-full-3.0/framebuffer/Makefile.target	2013-09-04 17:56:45.980954115 +0200
-@@ -51,7 +51,7 @@ CFLAGS += -std=c99 -g -Dsmall $(WARNFLAG
- 	  $(shell $(PKG_CONFIG) --cflags libnsfb libhubbub libcss openssl) \
- 	  $(shell xml2-config --cflags)
+--- netsurf-3.4/framebuffer/Makefile.target.orig	2016-02-16 14:30:38.000000000 +0100
++++ netsurf-3.4/framebuffer/Makefile.target	2016-02-27 16:44:59.385032043 +0100
+@@ -39,9 +39,7 @@ CFLAGS += -std=c99 -g -Dsmall \
+ LDFLAGS += -lm
  
--LDFLAGS += -lm -Wl,--whole-archive $(shell $(PKG_CONFIG) --libs libnsfb) -Wl,--no-whole-archive 
-+LDFLAGS += -lm $(shell $(PKG_CONFIG) --libs libnsfb) 
+ # non optional pkg-configed libs
+-LDFLAGS += -Wl,--whole-archive
+ $(eval $(call pkg_config_find_and_add,libnsfb,libnsfb))
+-LDFLAGS += -Wl,--no-whole-archive
  
- ifeq ($(HOST),mint)
-     # freemint does not support pkg-config for libcurl
+ $(eval $(call pkg_config_find_and_add,openssl,OpenSSL))
+ 
