@@ -1,0 +1,22 @@
+--- netsurf-3.6/content/handlers/image/video.c.orig	2016-11-19 14:37:41.000000000 +0100
++++ netsurf-3.6/content/handlers/image/video.c	2016-11-21 17:24:58.168353942 +0100
+@@ -20,8 +20,10 @@
+ 
+ #include "content/content_factory.h"
+ #include "content/content_protected.h"
++#include "content/llcache.h"
+ 
+ #include "image/video.h"
++#include "utils/utils.h"
+ 
+ typedef struct nsvideo_content {
+ 	struct content base;
+@@ -67,7 +69,7 @@ static void nsvideo_source_event(GObject
+ }
+ 
+ static nserror nsvideo_create(const content_handler *handler,
+-		lwc_string *imime_type, const http_parameter *params,
++		lwc_string *imime_type, const struct http_parameter *params,
+ 		llcache_handle *llcache,
+ 		const char *fallback_charset, bool quirks,
+ 		struct content **c)

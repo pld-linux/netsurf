@@ -8,40 +8,42 @@
 Summary:	Light WWW browser with CSS support
 Summary(pl.UTF-8):	Lekka przeglądarka WWW z obsługą CSS
 Name:		netsurf
-Version:	3.5
+Version:	3.6
 Release:	1
 License:	GPL v2 with OpenSSL exception (code), MIT (artwork)
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
-# Source0-md5:	eab97038417ce412b21abc2df0b98845
+# Source0-md5:	105e1ee258cf283b945489dd36e7effa
 Source1:	%{name}.desktop
 Patch0:		nsfb-ldflags.patch
 Patch1:		%{name}-link.patch
 Patch3:		optflags.patch
+Patch4:		fixes.patch
 URL:		http://netsurf-browser.org/
 BuildRequires:	curl-devel
 BuildRequires:	freetype-devel >= 2
 %{?with_gstreamer:BuildRequires:	gstreamer0.10-devel >= 0.10}
 BuildRequires:	gtk+2-devel >= 2.0
-BuildRequires:	libCSS-devel >= 0.6.0
-BuildRequires:	libdom-devel >= 0.3.0
+BuildRequires:	libCSS-devel >= 0.6.1
+BuildRequires:	libdom-devel >= 0.3.1
 %{?with_pdf:BuildRequires:	libharu-devel}
 BuildRequires:	libhubbub-devel >= 0.3.3
 BuildRequires:	libjpeg-devel
-BuildRequires:	libnsbmp-devel >= 0.1.3
-BuildRequires:	libnsfb-devel >= 0.1.4
-BuildRequires:	libnsgif-devel >= 0.1.3
-BuildRequires:	libnsutils-devel >= 0.0.2
+BuildRequires:	libnsbmp-devel >= 0.1.4
+BuildRequires:	libnsfb-devel >= 0.1.5
+BuildRequires:	libnsgif-devel >= 0.1.4
+BuildRequires:	libnspsl-devel >= 0.1.0
+BuildRequires:	libnsutils-devel >= 0.0.3
 BuildRequires:	libparserutils-devel >= 0.2.3
 BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
-BuildRequires:	libsvgtiny-devel >= 0.1.4
+BuildRequires:	libsvgtiny-devel >= 0.1.5
 BuildRequires:	libutf8proc-devel >= 1.3.1
-BuildRequires:	libwapcaplet-devel >= 0.3.0
+BuildRequires:	libwapcaplet-devel >= 0.4.0
 %{?with_webp:BuildRequires:	libwebp-devel}
 BuildRequires:	openssl-devel
 BuildRequires:	netsurf-buildsystem >= 1.5
-BuildRequires:	nsgenbind >= 0.3
+BuildRequires:	nsgenbind >= 0.4
 BuildRequires:	perl-HTML-Parser
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
@@ -131,6 +133,7 @@ Ten pakiet zawiera wersję SDL.
 %patch0 -p1
 %patch1 -p1
 %patch3 -p1
+%patch4 -p1
 
 cat << EOF > Makefile.config
 NETSURF_FB_FONTLIB := freetype
@@ -144,10 +147,10 @@ EOF
 
 %if %{with gstreamer}
 # GStreamer 0.10 uses now deprecated glib mutex APIs
-%{__sed} -i -e '/-DG_DISABLE_DEPRECATED/d' gtk/Makefile.target
+%{__sed} -i -e '/-DG_DISABLE_DEPRECATED/d' frontends/gtk/Makefile
 %endif
 # gdk-pixbuf 2.31 deprecates GdkPixdata
-%{__sed} -i -e '/-DGDK_PIXBUF_DISABLE_DEPRECATED/d' gtk/Makefile.target
+%{__sed} -i -e '/-DGDK_PIXBUF_DISABLE_DEPRECATED/d' frontends/gtk/Makefile
 
 %build
 export CC="%{__cc}"
@@ -162,14 +165,14 @@ export LDFLAGS="%{rpmldflags}"
 
 # make -j1 or it won't find libwapcaplet/libwapcaplet.h
 
-%{__make} -j1 \
+%{__make} \
 	OPTFLAGS="%{rpmcflags} -Wno-error=unused-but-set-variable -D_GNU_SOURCE" \
 	OPTLDFLAGS="%{rpmldflags}" \
 	PREFIX=%{_prefix} \
 	Q='' \
 	TARGET=gtk
 
-%{__make} -j1 \
+%{__make} \
 	OPTFLAGS="%{rpmcflags} -Wno-error=unused-but-set-variable -D_GNU_SOURCE" \
 	OPTLDFLAGS="%{rpmldflags}" \
 	PREFIX=%{_prefix} \

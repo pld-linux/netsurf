@@ -1,5 +1,5 @@
---- netsurf-3.4/framebuffer/Makefile.target.orig	2016-02-16 14:30:38.000000000 +0100
-+++ netsurf-3.4/framebuffer/Makefile.target	2016-02-27 16:44:59.385032043 +0100
+--- netsurf-3.6/frontends/framebuffer/Makefile.orig	2016-02-16 14:30:38.000000000 +0100
++++ netsurf-3.6/frontends/framebuffer/Makefile	2016-02-27 16:44:59.385032043 +0100
 @@ -39,9 +39,7 @@ CFLAGS += -std=c99 -g -Dsmall \
  LDFLAGS += -lm
  
