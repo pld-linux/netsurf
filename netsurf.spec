@@ -99,8 +99,8 @@ wykorzystanie zasobów, z zachowaniem dużej szybkości.
 Ten pakiet zawiera wersję GTK+.
 
 %package sdl
-Summary:	NetSurf web browser - SDL version
-Summary(pl.UTF-8):	Wersja SDL przeglądarki WWW NetSurf
+Summary:	NetSurf web browser - SDL (framebuffer aware) version
+Summary(pl.UTF-8):	Wersja SDL (obsługująca framebuffer) przeglądarki WWW NetSurf
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
 Requires:	libCSS >= 0.6.0
@@ -119,14 +119,14 @@ NetSurf is a multi-platform lightweight web browser. Its aim is to
 provide comprehensive rendering of HTML 5 with CSS 2 in a small
 resource footprint while remaining fast.
 
-This package contains SDL version.
+This package contains SDL, framebuffer aware version.
 
 %description sdl -l pl.UTF-8
 NetSurf to wieloplatformowa, lekka przeglądarka WWW. Celem jest
 zapewnienie kompletnego renderowania HTML 5 z CSS 2 przy małym
 wykorzystanie zasobów, z zachowaniem dużej szybkości.
 
-Ten pakiet zawiera wersję SDL.
+Ten pakiet zawiera wersję SDL, obsługującą framebuffer.
 
 %prep
 %setup -q
@@ -194,13 +194,12 @@ rm -rf $RPM_BUILD_ROOT
 	TARGET=framebuffer \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# this is binary from last "make install", we install more specific binary ourself
-%{__rm} -f $RPM_BUILD_ROOT%{_bindir}/netsurf
-
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install nsfb $RPM_BUILD_ROOT%{_bindir}
-install nsgtk $RPM_BUILD_ROOT%{_bindir}
+
+# compatibility with older PLD packages
+ln -sf netsurf-fb $RPM_BUILD_ROOT%{_bindir}/nsfb
+ln -sf netsurf-gtk $RPM_BUILD_ROOT%{_bindir}/nsgtk
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -209,13 +208,33 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYING README
 %dir %{_datadir}/%{name}
-%{_datadir}/%{name}/*
+%{_datadir}/%{name}/Messages
+%{_datadir}/%{name}/SearchEngines
+%{_datadir}/%{name}/default.ico
+%{_datadir}/%{name}/languages
+%{_datadir}/%{name}/messages
+%{_datadir}/%{name}/*.css
+%{_datadir}/%{name}/*.html
+%{_datadir}/%{name}/*.png
+%{_datadir}/%{name}/*.txt
+%{_datadir}/%{name}/*.xpm
+%{_datadir}/%{name}/icons
+%{_datadir}/%{name}/throbber
+%lang(de) %{_datadir}/%{name}/de
+%{_datadir}/%{name}/en
+%lang(fr) %{_datadir}/%{name}/fr
+%lang(it) %{_datadir}/%{name}/it
+%lang(ja) %{_datadir}/%{name}/ja
+%lang(nl) %{_datadir}/%{name}/nl
 
 %files gtk
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/netsurf-gtk
 %attr(755,root,root) %{_bindir}/nsgtk
+%{_datadir}/%{name}/*.gtk2.ui
 %{_desktopdir}/netsurf.desktop
 
 %files sdl
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/netsurf-fb
 %attr(755,root,root) %{_bindir}/nsfb
