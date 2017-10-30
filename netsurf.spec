@@ -8,12 +8,12 @@
 Summary:	Light WWW browser with CSS support
 Summary(pl.UTF-8):	Lekka przeglądarka WWW z obsługą CSS
 Name:		netsurf
-Version:	3.6
+Version:	3.7
 Release:	1
 License:	GPL v2 with OpenSSL exception (code), MIT (artwork)
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
-# Source0-md5:	105e1ee258cf283b945489dd36e7effa
+# Source0-md5:	27e011cb3eae054e7ee7d20c03cbac0a
 Source1:	%{name}.desktop
 Patch0:		nsfb-ldflags.patch
 Patch1:		%{name}-link.patch
@@ -24,21 +24,22 @@ BuildRequires:	curl-devel
 BuildRequires:	freetype-devel >= 2
 %{?with_gstreamer:BuildRequires:	gstreamer0.10-devel >= 0.10}
 BuildRequires:	gtk+2-devel >= 2.0
-BuildRequires:	libCSS-devel >= 0.6.1
-BuildRequires:	libdom-devel >= 0.3.1
+BuildRequires:	libCSS-devel >= 0.7.0
+BuildRequires:	libdom-devel >= 0.3.2
 %{?with_pdf:BuildRequires:	libharu-devel}
-BuildRequires:	libhubbub-devel >= 0.3.3
+BuildRequires:	libhubbub-devel >= 0.3.4
 BuildRequires:	libjpeg-devel
 BuildRequires:	libnsbmp-devel >= 0.1.4
-BuildRequires:	libnsfb-devel >= 0.1.5
-BuildRequires:	libnsgif-devel >= 0.1.4
-BuildRequires:	libnspsl-devel >= 0.1.0
+BuildRequires:	libnsfb-devel >= 0.1.6
+BuildRequires:	libnsgif-devel >= 0.2.0
+BuildRequires:	libnslog-devel >= 0.1.0
+BuildRequires:	libnspsl-devel >= 0.1.2
 BuildRequires:	libnsutils-devel >= 0.0.3
 BuildRequires:	libparserutils-devel >= 0.2.3
 BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
-BuildRequires:	libsvgtiny-devel >= 0.1.5
-BuildRequires:	libutf8proc-devel >= 1.3.1
+BuildRequires:	libsvgtiny-devel >= 0.1.6
+BuildRequires:	libutf8proc-devel >= 1.3.1-2
 BuildRequires:	libwapcaplet-devel >= 0.4.0
 %{?with_webp:BuildRequires:	libwebp-devel}
 BuildRequires:	openssl-devel

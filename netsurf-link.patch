@@ -1,14 +1,13 @@
---- netsurf-3.6/Makefile.orig	2016-11-19 14:37:41.000000000 +0100
-+++ netsurf-3.6/Makefile	2016-11-21 17:41:51.001343161 +0100
-@@ -563,6 +563,11 @@ $(eval $(call pkg_config_find_and_add_en
- $(eval $(call pkg_config_find_and_add_enabled,NSSVG,libsvgtiny,SVG))
- $(eval $(call pkg_config_find_and_add_enabled,ROSPRITE,librosprite,Sprite))
- $(eval $(call pkg_config_find_and_add_enabled,NSPSL,libnspsl,PSL))
+--- netsurf-3.7/Makefile.orig	2017-10-15 15:39:24.000000000 +0200
++++ netsurf-3.7/Makefile	2017-10-30 12:01:38.659851290 +0100
+@@ -555,7 +555,10 @@ $(eval $(call pkg_config_find_and_add_en
+ $(eval $(call pkg_config_find_and_add_enabled,PNG,libpng,PNG))
+ $(eval $(call pkg_config_find_and_add_enabled,BMP,libnsbmp,BMP))
+ $(eval $(call pkg_config_find_and_add_enabled,GIF,libnsgif,GIF))
 +$(eval $(call pkg_config_find_and_add_enabled,RSVG,librsvg-2.0,SVG))
-+$(eval $(call pkg_config_find_and_add_enabled,NSSVG,libsvgtiny,SVG))
+ $(eval $(call pkg_config_find_and_add_enabled,NSSVG,libsvgtiny,SVG))
 +$(eval $(call feature_enabled,WEBP,-DWITH_WEBP,-lwebp,WebP (libwebp)))
 +$(eval $(call pkg_config_find_and_add_enabled,VIDEO,gstreamer-0.10,Video))
-+
- 
- # List of directories in which headers are searched for
- INCLUDE_DIRS :=. include $(OBJROOT)
+ $(eval $(call pkg_config_find_and_add_enabled,ROSPRITE,librosprite,Sprite))
+ $(eval $(call pkg_config_find_and_add_enabled,NSPSL,libnspsl,PSL))
+ $(eval $(call pkg_config_find_and_add_enabled,NSLOG,libnslog,LOG))
