@@ -44,7 +44,7 @@ BuildRequires:	libwapcaplet-devel >= 0.4.0
 %{?with_webp:BuildRequires:	libwebp-devel}
 BuildRequires:	openssl-devel
 BuildRequires:	netsurf-buildsystem >= 1.5
-BuildRequires:	nsgenbind >= 0.4
+BuildRequires:	nsgenbind >= 0.5
 BuildRequires:	perl-HTML-Parser
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
