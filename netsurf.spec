@@ -19,6 +19,7 @@ Patch0:		nsfb-ldflags.patch
 Patch1:		%{name}-link.patch
 Patch3:		optflags.patch
 Patch4:		fixes.patch
+Patch5:		%{name}-utf8proc.patch
 URL:		http://netsurf-browser.org/
 BuildRequires:	curl-devel
 BuildRequires:	freetype-devel >= 2
@@ -39,7 +40,7 @@ BuildRequires:	libparserutils-devel >= 0.2.3
 BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
 BuildRequires:	libsvgtiny-devel >= 0.1.6
-BuildRequires:	libutf8proc-devel >= 1.3.1-2
+BuildRequires:	libutf8proc-devel >= 1.3.1-4
 BuildRequires:	libwapcaplet-devel >= 0.4.0
 %{?with_webp:BuildRequires:	libwebp-devel}
 BuildRequires:	openssl-devel
@@ -135,6 +136,7 @@ Ten pakiet zawiera wersję SDL, obsługującą framebuffer.
 %patch1 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 cat << EOF > Makefile.config
 NETSURF_FB_FONTLIB := freetype
