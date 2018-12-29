@@ -1,9 +1,9 @@
---- netsurf-3.7/utils/idna.c.orig	2017-10-15 15:39:24.000000000 +0200
-+++ netsurf-3.7/utils/idna.c	2018-07-13 21:49:53.094700504 +0200
-@@ -26,7 +26,7 @@
- #include <stdint.h>
+--- netsurf-3.8/utils/idna.c.orig	2018-12-28 22:24:16.067580948 +0100
++++ netsurf-3.8/utils/idna.c	2018-12-28 22:24:43.304247300 +0100
+@@ -27,7 +27,7 @@
  #include <stdlib.h>
  #include <string.h>
+ #include <sys/types.h>
 -#include <libutf8proc/utf8proc.h>
 +#include <utf8proc.h>
  
