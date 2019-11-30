@@ -8,12 +8,12 @@
 Summary:	Light WWW browser with CSS support
 Summary(pl.UTF-8):	Lekka przeglądarka WWW z obsługą CSS
 Name:		netsurf
-Version:	3.8
+Version:	3.9
 Release:	1
 License:	GPL v2 with OpenSSL exception (code), MIT (artwork)
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
-# Source0-md5:	94c798db91f6717838f6b686b98b409c
+# Source0-md5:	9262e5c2005c08281fce7596cf80e165
 Source1:	%{name}.desktop
 Patch0:		nsfb-ldflags.patch
 Patch1:		%{name}-link.patch
@@ -25,27 +25,27 @@ BuildRequires:	curl-devel
 BuildRequires:	freetype-devel >= 2
 %{?with_gstreamer:BuildRequires:	gstreamer0.10-devel >= 0.10}
 BuildRequires:	gtk+2-devel >= 2.0
-BuildRequires:	libCSS-devel >= 0.8.0
-BuildRequires:	libdom-devel >= 0.3.3
+BuildRequires:	libCSS-devel >= 0.9.0
+BuildRequires:	libdom-devel >= 0.4.0
 %{?with_pdf:BuildRequires:	libharu-devel}
-BuildRequires:	libhubbub-devel >= 0.3.5
+BuildRequires:	libhubbub-devel >= 0.3.6
 BuildRequires:	libjpeg-devel
 BuildRequires:	libnsbmp-devel >= 0.1.5
-BuildRequires:	libnsfb-devel >= 0.2.0
+BuildRequires:	libnsfb-devel >= 0.2.1
 BuildRequires:	libnsgif-devel >= 0.2.1
 BuildRequires:	libnslog-devel >= 0.1.2
-BuildRequires:	libnspsl-devel >= 0.1.3
+BuildRequires:	libnspsl-devel >= 0.1.5
 BuildRequires:	libnsutils-devel >= 0.0.5
 BuildRequires:	libparserutils-devel >= 0.2.4
 BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
 BuildRequires:	libsvgtiny-devel >= 0.1.7
-BuildRequires:	libutf8proc-devel >= 2.2.0
-BuildRequires:	libwapcaplet-devel >= 0.4.1
+BuildRequires:	libutf8proc-devel >= 2.4.0
+BuildRequires:	libwapcaplet-devel >= 0.4.2
 %{?with_webp:BuildRequires:	libwebp-devel}
 BuildRequires:	openssl-devel
-BuildRequires:	netsurf-buildsystem >= 1.7
-BuildRequires:	nsgenbind >= 0.6
+BuildRequires:	netsurf-buildsystem >= 1.8
+BuildRequires:	nsgenbind >= 0.7
 BuildRequires:	perl-HTML-Parser
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
@@ -77,14 +77,16 @@ Summary:	NetSurf web browser - GTK+ version
 Summary(pl.UTF-8):	Wersja GTK+ przeglądarki WWW NetSurf
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
-Requires:	libCSS >= 0.8.0
-Requires:	libdom >= 0.3.3
-Requires:	libhubbub >= 0.3.5
+Requires:	libCSS >= 0.9.0
+Requires:	libdom >= 0.4.0
+Requires:	libhubbub >= 0.3.6
 Requires:	libnsbmp >= 0.1.5
 Requires:	libnsgif >= 0.2.1
+Requires:	libnspsl >= 0.1.5
 Requires:	libparserutils >= 0.2.4
 Requires:	libsvgtiny >= 0.1.7
-Requires:	libwapcaplet >= 0.4.1
+Requires:	libutf8proc >= 2.4.0
+Requires:	libwapcaplet >= 0.4.2
 
 %description gtk
 NetSurf is a multi-platform lightweight web browser. Its aim is to
@@ -105,15 +107,17 @@ Summary:	NetSurf web browser - SDL (framebuffer aware) version
 Summary(pl.UTF-8):	Wersja SDL (obsługująca framebuffer) przeglądarki WWW NetSurf
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
-Requires:	libCSS >= 0.8.0
-Requires:	libdom >= 0.3.3
-Requires:	libhubbub >= 0.3.5
+Requires:	libCSS >= 0.9.0
+Requires:	libdom >= 0.4.0
+Requires:	libhubbub >= 0.3.6
 Requires:	libnsbmp >= 0.1.5
-Requires:	libnsfb >= 0.2.0
+Requires:	libnsfb >= 0.2.1
 Requires:	libnsgif >= 0.2.1
+Requires:	libnspsl >= 0.1.5
 Requires:	libparserutils >= 0.2.4
 Requires:	libsvgtiny >= 0.1.7
-Requires:	libwapcaplet >= 0.4.1
+Requires:	libutf8proc >= 2.4.0
+Requires:	libwapcaplet >= 0.4.2
 Suggests:	fonts-TTF-DejaVu
 
 %description sdl
@@ -215,7 +219,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/SearchEngines
 %{_datadir}/%{name}/default.ico
 %{_datadir}/%{name}/languages
-%{_datadir}/%{name}/messages
 %{_datadir}/%{name}/*.css
 %{_datadir}/%{name}/*.html
 %{_datadir}/%{name}/*.png
