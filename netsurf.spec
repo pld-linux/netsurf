@@ -8,12 +8,12 @@
 Summary:	Light WWW browser with CSS support
 Summary(pl.UTF-8):	Lekka przeglądarka WWW z obsługą CSS
 Name:		netsurf
-Version:	3.9
+Version:	3.10
 Release:	1
 License:	GPL v2 with OpenSSL exception (code), MIT (artwork)
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
-# Source0-md5:	9262e5c2005c08281fce7596cf80e165
+# Source0-md5:	e042b09c9d89347625099996af607a4c
 Source1:	%{name}.desktop
 Patch0:		nsfb-ldflags.patch
 Patch1:		%{name}-link.patch
@@ -25,27 +25,27 @@ BuildRequires:	curl-devel
 BuildRequires:	freetype-devel >= 2
 %{?with_gstreamer:BuildRequires:	gstreamer0.10-devel >= 0.10}
 BuildRequires:	gtk+2-devel >= 2.0
-BuildRequires:	libCSS-devel >= 0.9.0
-BuildRequires:	libdom-devel >= 0.4.0
+BuildRequires:	libCSS-devel >= 0.9.1
+BuildRequires:	libdom-devel >= 0.4.1
 %{?with_pdf:BuildRequires:	libharu-devel}
-BuildRequires:	libhubbub-devel >= 0.3.6
+BuildRequires:	libhubbub-devel >= 0.3.7
 BuildRequires:	libjpeg-devel
-BuildRequires:	libnsbmp-devel >= 0.1.5
-BuildRequires:	libnsfb-devel >= 0.2.1
+BuildRequires:	libnsbmp-devel >= 0.1.6
+BuildRequires:	libnsfb-devel >= 0.2.2
 BuildRequires:	libnsgif-devel >= 0.2.1
-BuildRequires:	libnslog-devel >= 0.1.2
-BuildRequires:	libnspsl-devel >= 0.1.5
-BuildRequires:	libnsutils-devel >= 0.0.5
+BuildRequires:	libnslog-devel >= 0.1.3
+BuildRequires:	libnspsl-devel >= 0.1.6
+BuildRequires:	libnsutils-devel >= 0.1.0
 BuildRequires:	libparserutils-devel >= 0.2.4
 BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
 BuildRequires:	libsvgtiny-devel >= 0.1.7
 BuildRequires:	libutf8proc-devel >= 2.4.0
-BuildRequires:	libwapcaplet-devel >= 0.4.2
+BuildRequires:	libwapcaplet-devel >= 0.4.3
 %{?with_webp:BuildRequires:	libwebp-devel}
 BuildRequires:	openssl-devel
-BuildRequires:	netsurf-buildsystem >= 1.8
-BuildRequires:	nsgenbind >= 0.7
+BuildRequires:	netsurf-buildsystem >= 1.9
+BuildRequires:	nsgenbind >= 0.8
 BuildRequires:	perl-HTML-Parser
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
@@ -77,16 +77,16 @@ Summary:	NetSurf web browser - GTK+ version
 Summary(pl.UTF-8):	Wersja GTK+ przeglądarki WWW NetSurf
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
-Requires:	libCSS >= 0.9.0
-Requires:	libdom >= 0.4.0
-Requires:	libhubbub >= 0.3.6
-Requires:	libnsbmp >= 0.1.5
+Requires:	libCSS >= 0.9.1
+Requires:	libdom >= 0.4.1
+Requires:	libhubbub >= 0.3.7
+Requires:	libnsbmp >= 0.1.6
 Requires:	libnsgif >= 0.2.1
-Requires:	libnspsl >= 0.1.5
+Requires:	libnspsl >= 0.1.6
 Requires:	libparserutils >= 0.2.4
 Requires:	libsvgtiny >= 0.1.7
 Requires:	libutf8proc >= 2.4.0
-Requires:	libwapcaplet >= 0.4.2
+Requires:	libwapcaplet >= 0.4.3
 
 %description gtk
 NetSurf is a multi-platform lightweight web browser. Its aim is to
@@ -107,17 +107,17 @@ Summary:	NetSurf web browser - SDL (framebuffer aware) version
 Summary(pl.UTF-8):	Wersja SDL (obsługująca framebuffer) przeglądarki WWW NetSurf
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
-Requires:	libCSS >= 0.9.0
-Requires:	libdom >= 0.4.0
-Requires:	libhubbub >= 0.3.6
-Requires:	libnsbmp >= 0.1.5
-Requires:	libnsfb >= 0.2.1
+Requires:	libCSS >= 0.9.1
+Requires:	libdom >= 0.4.1
+Requires:	libhubbub >= 0.3.7
+Requires:	libnsbmp >= 0.1.6
+Requires:	libnsfb >= 0.2.2
 Requires:	libnsgif >= 0.2.1
-Requires:	libnspsl >= 0.1.5
+Requires:	libnspsl >= 0.1.6
 Requires:	libparserutils >= 0.2.4
 Requires:	libsvgtiny >= 0.1.7
 Requires:	libutf8proc >= 2.4.0
-Requires:	libwapcaplet >= 0.4.2
+Requires:	libwapcaplet >= 0.4.3
 Suggests:	fonts-TTF-DejaVu
 
 %description sdl
@@ -177,7 +177,7 @@ export LDFLAGS="%{rpmldflags}"
 	OPTLDFLAGS="%{rpmldflags}" \
 	PREFIX=%{_prefix} \
 	Q='' \
-	TARGET=gtk
+	TARGET=gtk2
 
 %{__make} \
 	OPTFLAGS="%{rpmcflags} -Wno-error=unused-but-set-variable -D_GNU_SOURCE" \
@@ -191,7 +191,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	Q='' \
 	PREFIX=%{_prefix} \
-	TARGET=gtk \
+	TARGET=gtk2 \
 	DESTDIR=$RPM_BUILD_ROOT
 
 
@@ -206,14 +206,14 @@ cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 
 # compatibility with older PLD packages
 ln -sf netsurf-fb $RPM_BUILD_ROOT%{_bindir}/nsfb
-ln -sf netsurf-gtk $RPM_BUILD_ROOT%{_bindir}/nsgtk
+ln -sf netsurf-gtk2 $RPM_BUILD_ROOT%{_bindir}/nsgtk
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files common
 %defattr(644,root,root,755)
-%doc COPYING README
+%doc COPYING
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/Messages
 %{_datadir}/%{name}/SearchEngines
@@ -235,7 +235,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files gtk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/netsurf-gtk
+%attr(755,root,root) %{_bindir}/netsurf-gtk2
 %attr(755,root,root) %{_bindir}/nsgtk
 %{_datadir}/%{name}/*.gtk2.ui
 %{_desktopdir}/netsurf.desktop
