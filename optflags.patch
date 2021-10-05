@@ -1,7 +1,7 @@
 --- netsurf-3.6/Makefile.orig	2016-11-19 14:37:41.000000000 +0100
 +++ netsurf-3.6/Makefile	2016-11-21 14:50:30.664966026 +0100
 @@ -530,7 +530,7 @@
- $(eval $(call pkg_config_find_and_add,libutf8proc,utf8proc))
+ $(eval $(call pkg_config_find_and_add,libnsutils,nsutils))
  
  # Common libraries without pkg-config support
 -LDFLAGS += -lz

@@ -1,12 +1,13 @@
---- netsurf-3.6/frontends/framebuffer/Makefile.orig	2016-02-16 14:30:38.000000000 +0100
-+++ netsurf-3.6/frontends/framebuffer/Makefile	2016-02-27 16:44:59.385032043 +0100
-@@ -39,9 +39,7 @@ CFLAGS += -std=c99 -g -Dsmall \
- LDFLAGS += -lm
+diff -urNp -x '*.orig' netsurf-3.10.org/frontends/framebuffer/Makefile netsurf-3.10/frontends/framebuffer/Makefile
+--- netsurf-3.10.org/frontends/framebuffer/Makefile	2020-05-24 22:55:29.000000000 +0200
++++ netsurf-3.10/frontends/framebuffer/Makefile	2021-10-05 21:43:14.965997618 +0200
+@@ -51,9 +51,7 @@ ifeq ($(NETSURF_FB_FONTLIB),freetype)
+ endif
  
  # non optional pkg-configed libs
 -LDFLAGS += -Wl,--whole-archive
  $(eval $(call pkg_config_find_and_add,libnsfb,libnsfb))
 -LDFLAGS += -Wl,--no-whole-archive
  
- $(eval $(call pkg_config_find_and_add,openssl,OpenSSL))
- 
+ # ---------------------------------------------------------------------------
+ # Target setup
