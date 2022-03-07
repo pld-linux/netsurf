@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	gstreamer	# GStreamer-based video support
+%bcond_with	gstreamer	# GStreamer-based video support
 %bcond_without	js		# JavaScript support
 %bcond_with	pdf		# PDF export and GTK+ printing support via libharu [needs update?]
 %bcond_without	webp		# WebP image support
