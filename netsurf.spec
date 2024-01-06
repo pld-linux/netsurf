@@ -8,12 +8,12 @@
 Summary:	Light WWW browser with CSS support
 Summary(pl.UTF-8):	Lekka przeglądarka WWW z obsługą CSS
 Name:		netsurf
-Version:	3.10
-Release:	3
+Version:	3.11
+Release:	1
 License:	GPL v2 with OpenSSL exception (code), MIT (artwork)
 Group:		Applications/Networking
 Source0:	http://download.netsurf-browser.org/netsurf/releases/source/%{name}-%{version}-src.tar.gz
-# Source0-md5:	e042b09c9d89347625099996af607a4c
+# Source0-md5:	d4a8c61cea7d507aa6633f4ab99980c9
 Source1:	%{name}.desktop
 Patch0:		nsfb-ldflags.patch
 Patch1:		%{name}-link.patch
@@ -25,27 +25,27 @@ BuildRequires:	curl-devel
 BuildRequires:	freetype-devel >= 2
 %{?with_gstreamer:BuildRequires:	gstreamer0.10-devel >= 0.10}
 BuildRequires:	gtk+2-devel >= 2.0
-BuildRequires:	libCSS-devel >= 0.9.1
-BuildRequires:	libdom-devel >= 0.4.1
+BuildRequires:	libCSS-devel >= 0.9.2
+BuildRequires:	libdom-devel >= 0.4.2
 %{?with_pdf:BuildRequires:	libharu-devel}
-BuildRequires:	libhubbub-devel >= 0.3.7
+BuildRequires:	libhubbub-devel >= 0.3.8
 BuildRequires:	libjpeg-devel
-BuildRequires:	libnsbmp-devel >= 0.1.6
+BuildRequires:	libnsbmp-devel >= 0.1.7
 BuildRequires:	libnsfb-devel >= 0.2.2
-BuildRequires:	libnsgif-devel >= 0.2.1
+BuildRequires:	libnsgif-devel >= 1.0.0
 BuildRequires:	libnslog-devel >= 0.1.3
-BuildRequires:	libnspsl-devel >= 0.1.6
-BuildRequires:	libnsutils-devel >= 0.1.0
-BuildRequires:	libparserutils-devel >= 0.2.4
+BuildRequires:	libnspsl-devel >= 0.1.7
+BuildRequires:	libnsutils-devel >= 0.1.1
+BuildRequires:	libparserutils-devel >= 0.2.5
 BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
-BuildRequires:	libsvgtiny-devel >= 0.1.7
+BuildRequires:	libsvgtiny-devel >= 0.1.8
 BuildRequires:	libutf8proc-devel >= 2.4.0
 BuildRequires:	libwapcaplet-devel >= 0.4.3
 %{?with_webp:BuildRequires:	libwebp-devel}
 BuildRequires:	openssl-devel
-BuildRequires:	netsurf-buildsystem >= 1.9
-BuildRequires:	nsgenbind >= 0.8
+BuildRequires:	netsurf-buildsystem >= 1.10
+BuildRequires:	nsgenbind >= 0.9
 BuildRequires:	perl-HTML-Parser
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
@@ -77,14 +77,14 @@ Summary:	NetSurf web browser - GTK+ version
 Summary(pl.UTF-8):	Wersja GTK+ przeglądarki WWW NetSurf
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
-Requires:	libCSS >= 0.9.1
-Requires:	libdom >= 0.4.1
-Requires:	libhubbub >= 0.3.7
-Requires:	libnsbmp >= 0.1.6
-Requires:	libnsgif >= 0.2.1
-Requires:	libnspsl >= 0.1.6
-Requires:	libparserutils >= 0.2.4
-Requires:	libsvgtiny >= 0.1.7
+Requires:	libCSS >= 0.9.2
+Requires:	libdom >= 0.4.2
+Requires:	libhubbub >= 0.3.8
+Requires:	libnsbmp >= 0.1.7
+Requires:	libnsgif >= 1.0.0
+Requires:	libnspsl >= 0.1.7
+Requires:	libparserutils >= 0.2.5
+Requires:	libsvgtiny >= 0.1.8
 Requires:	libutf8proc >= 2.4.0
 Requires:	libwapcaplet >= 0.4.3
 
@@ -107,15 +107,15 @@ Summary:	NetSurf web browser - SDL (framebuffer aware) version
 Summary(pl.UTF-8):	Wersja SDL (obsługująca framebuffer) przeglądarki WWW NetSurf
 Group:		Applications/Networking
 Requires:	%{name}-common = %{version}-%{release}
-Requires:	libCSS >= 0.9.1
-Requires:	libdom >= 0.4.1
-Requires:	libhubbub >= 0.3.7
-Requires:	libnsbmp >= 0.1.6
+Requires:	libCSS >= 0.9.2
+Requires:	libdom >= 0.4.2
+Requires:	libhubbub >= 0.3.8
+Requires:	libnsbmp >= 0.1.7
 Requires:	libnsfb >= 0.2.2
-Requires:	libnsgif >= 0.2.1
-Requires:	libnspsl >= 0.1.6
-Requires:	libparserutils >= 0.2.4
-Requires:	libsvgtiny >= 0.1.7
+Requires:	libnsgif >= 1.0.0
+Requires:	libnspsl >= 0.1.7
+Requires:	libparserutils >= 0.2.5
+Requires:	libsvgtiny >= 0.1.8
 Requires:	libutf8proc >= 2.4.0
 Requires:	libwapcaplet >= 0.4.3
 Suggests:	fonts-TTF-DejaVu
@@ -223,6 +223,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/*.html
 %{_datadir}/%{name}/*.png
 %{_datadir}/%{name}/*.txt
+%{_datadir}/%{name}/*.ui
 %{_datadir}/%{name}/*.xpm
 %{_datadir}/%{name}/icons
 %{_datadir}/%{name}/throbber
@@ -237,7 +238,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/netsurf-gtk2
 %attr(755,root,root) %{_bindir}/nsgtk
-%{_datadir}/%{name}/*.gtk2.ui
 %{_desktopdir}/netsurf.desktop
 
 %files sdl
