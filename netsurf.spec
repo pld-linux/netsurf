@@ -2,6 +2,7 @@
 # Conditional build:
 %bcond_with	gstreamer	# GStreamer-based video support
 %bcond_without	js		# JavaScript support
+%bcond_without	libjxl		# JPEG-XL image support via libjxl
 %bcond_with	pdf		# PDF export and GTK+ printing support via libharu [needs update?]
 %bcond_without	webp		# WebP image support
 #
@@ -29,6 +30,7 @@ BuildRequires:	libCSS-devel >= 0.9.2
 BuildRequires:	libdom-devel >= 0.4.2
 %{?with_pdf:BuildRequires:	libharu-devel}
 BuildRequires:	libhubbub-devel >= 0.3.8
+%{?with_libjxl:BuildRequires:	libjxl-devel}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libnsbmp-devel >= 0.1.7
 BuildRequires:	libnsfb-devel >= 0.2.2
@@ -150,6 +152,7 @@ NETSURF_USE_RSVG := YES
 %{?with_webp:NETSURF_USE_WEBP := YES}
 %{?with_gstreamer:NETSURF_USE_VIDEO := YES}
 %{?with_pdf:NETSURF_USE_HARU_PDF := YES}
+%{!?with_libjxl:NETSURF_USE_JPEGXL := NO}
 EOF
 
 %if %{with gstreamer}
@@ -188,6 +191,7 @@ export LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
 	Q='' \
 	PREFIX=%{_prefix} \
@@ -233,6 +237,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(it) %{_datadir}/%{name}/it
 %lang(ja) %{_datadir}/%{name}/ja
 %lang(nl) %{_datadir}/%{name}/nl
+%lang(zh_CN) %{_datadir}/%{name}/zh_CN
 
 %files gtk
 %defattr(644,root,root,755)
