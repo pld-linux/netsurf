@@ -78,6 +78,7 @@ NetSurf - wspólne pliki.
 Summary:	NetSurf web browser - GTK+ version
 Summary(pl.UTF-8):	Wersja GTK+ przeglądarki WWW NetSurf
 Group:		Applications/Networking
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-common = %{version}-%{release}
 Requires:	libCSS >= 0.9.2
 Requires:	libdom >= 0.4.2
@@ -214,6 +215,12 @@ ln -sf netsurf-gtk2 $RPM_BUILD_ROOT%{_bindir}/nsgtk
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post gtk
+%update_desktop_database_post
+
+%postun gtk
+%update_desktop_database_postun
 
 %files common
 %defattr(644,root,root,755)
