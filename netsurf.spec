@@ -42,7 +42,6 @@ BuildRequires:	libparserutils-devel >= 0.2.5
 BuildRequires:	libpng-devel
 BuildRequires:	librsvg-devel
 BuildRequires:	libsvgtiny-devel >= 0.1.8
-BuildRequires:	libutf8proc-devel >= 2.4.0
 BuildRequires:	libwapcaplet-devel >= 0.4.3
 %{?with_webp:BuildRequires:	libwebp-devel}
 BuildRequires:	openssl-devel
@@ -51,6 +50,7 @@ BuildRequires:	nsgenbind >= 0.9
 BuildRequires:	perl-HTML-Parser
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
+BuildRequires:	utf8proc-devel >= 2.4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -88,8 +88,8 @@ Requires:	libnsgif >= 1.0.0
 Requires:	libnspsl >= 0.1.7
 Requires:	libparserutils >= 0.2.5
 Requires:	libsvgtiny >= 0.1.8
-Requires:	libutf8proc >= 2.4.0
 Requires:	libwapcaplet >= 0.4.3
+Requires:	utf8proc >= 2.4.0
 
 %description gtk
 NetSurf is a multi-platform lightweight web browser. Its aim is to
@@ -119,8 +119,8 @@ Requires:	libnsgif >= 1.0.0
 Requires:	libnspsl >= 0.1.7
 Requires:	libparserutils >= 0.2.5
 Requires:	libsvgtiny >= 0.1.8
-Requires:	libutf8proc >= 2.4.0
 Requires:	libwapcaplet >= 0.4.3
+Requires:	utf8proc >= 2.4.0
 Suggests:	fonts-TTF-DejaVu
 
 %description sdl
